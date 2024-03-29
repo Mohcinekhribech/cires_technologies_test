@@ -1,5 +1,6 @@
 package com.example.cirestechnologiesTest.app.entities;
 
+import com.example.cirestechnologiesTest.app.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -58,12 +59,11 @@ public class User implements UserDetails {
     private String password;
 
     @Column(nullable = false)
-    private String role;
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return List.of(new SimpleGrantedAuthority(this.role()));
-        return null;
+        return List.of(new SimpleGrantedAuthority(this.role.name()));
     }
 
     @Override

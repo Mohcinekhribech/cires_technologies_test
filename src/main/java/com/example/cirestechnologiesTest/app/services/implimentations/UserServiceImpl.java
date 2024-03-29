@@ -1,6 +1,7 @@
 package com.example.cirestechnologiesTest.app.services.implimentations;
 
 import com.example.cirestechnologiesTest.app.entities.User;
+import com.example.cirestechnologiesTest.app.enums.Role;
 import com.example.cirestechnologiesTest.app.repositories.UserRepository;
 import com.example.cirestechnologiesTest.app.services.interfaces.UserService;
 import com.example.cirestechnologiesTest.app.dtos.UserDTO;
@@ -89,8 +90,8 @@ public class UserServiceImpl implements UserService {
         return RandomStringUtils.randomAlphanumeric(length);
     }
 
-    private String generateRandomRole() {
-        return ThreadLocalRandom.current().nextBoolean() ? "admin" : "user";
+    private Role generateRandomRole() {
+        return ThreadLocalRandom.current().nextBoolean() ? Role.admin : Role.user;
     }
     public UserDTO profile()
     {

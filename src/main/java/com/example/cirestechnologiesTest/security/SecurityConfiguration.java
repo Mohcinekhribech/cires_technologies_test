@@ -4,6 +4,7 @@ import com.example.cirestechnologiesTest.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -24,7 +25,6 @@ public class SecurityConfiguration {
     private static final String[] WHITE_LIST_URL = {
             "/swagger-ui/**",
             "/api/auth",
-            "/api/auth/signup",
             "/api/users/batch",
             "/api/users/generate",
             "/h2-console/**",
@@ -39,17 +39,8 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL).permitAll()
-//                                .requestMatchers(HttpMethod.GET,"/competition").hasAnyAuthority("Jury", "Manager", "Adherent")
-//                                .requestMatchers(HttpMethod.POST,"/competition").hasAnyAuthority("Jury", "Manager")
-//                                .requestMatchers(HttpMethod.DELETE,"/competition").hasAnyAuthority("Jury", "Manager")
-//                                .requestMatchers(HttpMethod.PUT,"/competition").hasAnyAuthority("Jury", "Manager")
-//
-//                                .requestMatchers("/fish").hasAnyAuthority("Jury", "Manager")
-//                                .requestMatchers("/hunting").hasAnyAuthority("Jury", "Manager")
-//                                .requestMatchers("/level").hasAnyAuthority("Manager")
-//                                .requestMatchers("/member").hasAnyAuthority("Manager")
-//                                .requestMatchers("/ranking/rapport").hasAnyAuthority("Jury", "Manager", "Adherent")
-//                                .requestMatchers("/ranking").hasAnyAuthority("Jury", "Manager")
+                                .requestMatchers(HttpMethod.GET,"/api/users/me").hasAnyAuthority("admin","user")
+                                .requestMatchers(HttpMethod.POST,"/api/users/{username}").hasAnyAuthority("admin")
                                 .anyRequest()
                                 .authenticated()
                 )

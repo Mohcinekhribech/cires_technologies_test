@@ -1,6 +1,7 @@
 package com.example.cirestechnologiesTest.app.dtos;
 
 
+import com.example.cirestechnologiesTest.app.enums.Role;
 import lombok.Data;
 @Data
 public class UserDTO {
@@ -28,5 +29,5 @@ public class UserDTO {
 
     private String password;
 
-    private String role;
+    private Role role;
 }
